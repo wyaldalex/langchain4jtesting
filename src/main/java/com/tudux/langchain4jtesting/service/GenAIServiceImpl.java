@@ -14,8 +14,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class GenAIServiceImpl implements GenAIService{
+
+
+    private final Assistant assistant;
+
     @Override
     public String getResponse(ChatRequest request) {
+        log.info("Received Open API request with request question:{} and userId:{}", request.question(), request.userId());
+        return assistant.chat(request.userId(), request.question());
+    }
+
+    @Override
+    public String getResponseSimple(ChatRequest request) {
 
        var model =  OpenAiChatModel.builder()
                 .apiKey("demo")
