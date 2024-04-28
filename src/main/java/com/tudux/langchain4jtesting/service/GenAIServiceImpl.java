@@ -5,23 +5,36 @@ import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModelName;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Slf4j
 public class GenAIServiceImpl implements GenAIService{
 
 
     private final Assistant assistant;
+    private UserContextRetrievalService userContextRetrievalService;
+    private static String fullPrompt = """
+            User Info:
+            %s
+            
+            User Question:
+            %s                        
+            """;
 
     @Override
     public String getResponse(ChatRequest request) {
-        log.info("Received Open API request with request question:{} and userId:{}", request.question(), request.userId());
-        return assistant.chat(request.userId(), request.question());
+        int userId = request.userId();
+        log.info("Received Open API request with request question:{} and userId:{}", request);
+        String finalPrompt = String.format(fullPrompt, userContextRetrievalService.getUserContext(userId), request.question());
+        // some mock user data
+        return assistant.chat(userId,finalPrompt);
+
     }
 
     @Override

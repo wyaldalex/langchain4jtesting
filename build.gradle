@@ -23,17 +23,16 @@ repositories {
 
 dependencies {
 
-	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
-
-	// langchain related
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'dev.langchain4j', name: 'langchain4j', version: '0.28.0'
-	implementation group: 'dev.langchain4j', name: 'langchain4j-open-ai', version: '0.28.0'
+	implementation 'org.postgresql:postgresql:42.6.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// langchain related
+	implementation group: 'dev.langchain4j', name: 'langchain4j', version: '0.28.0'
+	implementation group: 'dev.langchain4j', name: 'langchain4j-open-ai', version: '0.28.0'
 //	// testing auto configure lib
 //	implementation 'io.thomasvitale.langchain4j:langchain4j-spring-boot-autoconfigure'
 

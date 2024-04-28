@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://0.0.0.0:5432/my_database  # Replace with the database name if different
+    username: postgres
+    password: password  # Update with your chosen password
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # Adjust as needed (create, create-drop, etc.)
