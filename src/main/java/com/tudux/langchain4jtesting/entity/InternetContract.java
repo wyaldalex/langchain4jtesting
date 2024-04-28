@@ -2,10 +2,7 @@ package com.tudux.langchain4jtesting.entity;
 
 import com.tudux.langchain4jtesting.enums.ContractStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "internet_contracts")
@@ -21,6 +18,7 @@ public class InternetContract {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
+    @ToString.Exclude
     private Customer customer;
 
     @Column(nullable = false)
